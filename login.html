@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Admin Login</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+body{
+
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#050505;
+
+}
+
+.login-box{
+
+width:400px;
+background:#111;
+padding:35px;
+border-radius:15px;
+
+}
+
+.login-box h2{
+
+text-align:center;
+margin-bottom:30px;
+color:gold;
+
+}
+
+.login-box input{
+
+width:100%;
+padding:15px;
+margin-bottom:18px;
+border:none;
+border-radius:8px;
+
+}
+
+.login-box button{
+
+width:100%;
+padding:15px;
+background:gold;
+border:none;
+border-radius:8px;
+font-weight:bold;
+cursor:pointer;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>SS COLLECTION ADMIN</h2>
+
+<input
+type="email"
+id="email"
+placeholder="Email">
+
+<input
+type="password"
+id="password"
+placeholder="Password">
+
+<button onclick="login()">
+
+Login
+
+</button>
+
+</div>
+
+<script type="module" src="login.js"></script>
+
+</body>
+</html>

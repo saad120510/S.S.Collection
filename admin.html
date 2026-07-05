@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SS Collection Admin</title>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+body{
+    background:#111;
+    color:white;
+    font-family:Arial;
+}
+
+.admin{
+    width:450px;
+    margin:40px auto;
+    background:#1b1b1b;
+    padding:25px;
+    border-radius:10px;
+}
+
+input,select{
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:6px;
+}
+
+button{
+    width:100%;
+    padding:12px;
+    background:gold;
+    color:black;
+    font-weight:bold;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+
+img{
+    width:120px;
+    margin-top:10px;
+}
+</style>
+
+</head>
+<body>
+
+<div class="admin">
+
+<h2>SS COLLECTION ADMIN</h2>
+    <button
+        onclick="logout()"
+        style="background:#ff3b30; margin-bottom:20px;">
+        Logout
+    </button>
+<input type="file" id="image">
+
+<input type="text" id="name" placeholder="Product Name">
+
+<input type="number" id="price" placeholder="Price">
+    <textarea
+    id="description"
+    placeholder="Product Description"
+    rows="4"
+    style="
+    width:100%;
+    padding:12px;
+    margin:10px 0;
+    border:none;
+    border-radius:6px;
+    resize:none;
+    "></textarea>
+<select id="category">
+
+<option>Watch</option>
+
+<option>Shoes</option>
+
+<option>Slippers</option>
+
+<option>Sunglasses</option>
+
+<option>Bag</option>
+
+</select>
+
+<button onclick="uploadProduct()">
+Add Product
+</button>
+
+<hr>
+
+<h3 style="margin-top:20px;">All Products</h3>
+
+<div id="products"></div>
+
+</div>
+
+<script type="module" src="admin.js"></script>
+
+</body>
+</html>
