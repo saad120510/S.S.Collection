@@ -2,9 +2,10 @@ import { db } from "./firebase.js";
 
 import {
     collection,
-    getDocs
+    getDocs,
+    addDoc,
+    serverTimestamp
 } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
-
 let cart = [];
 
 // --------------------
@@ -140,21 +141,77 @@ function decreaseQuantity(index){
 // Checkout
 // --------------------
 
-function checkout() {
+async function checkout() {
 
-    let msg = "Hello, I want to order:%0A%0A";
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+
+    const name = document.getElementById("customerName").value.trim();
+    const phone = document.getElementById("customerPhone").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
+
+    if (!name || !phone || !address) {
+        alert("Please fill all customer details.");
+        return;
+    }
+
+    let total = 0;
+
+    let msg = "🛍️ *NEW ORDER*%0A%0A";
+
+    msg += `👤 Name: ${name}%0A`;
+    msg += `📞 Phone: ${phone}%0A`;
+    msg += `📍 Address: ${address}%0A%0A`;
+
+    msg += "📦 *Products:*%0A";
 
     cart.forEach(item => {
 
-        msg += `${item.name}%0A`;
-        msg += `₹${item.price}%0A`;
-        msg += `Photo: ${item.image}%0A%0A`;
+        msg += `• ${item.name}%0A`;
+        msg += `Qty: ${item.quantity}%0A`;
+        msg += `Price: ₹${item.price}%0A`;
+        msg += `Image: ${item.image}%0A%0A`;
+
+        total += item.price * item.quantity;
 
     });
 
-    window.open(
-        `https://wa.me/919662581023?text=${msg}`
-    );
+    msg += `💰 Total: ₹${total}`;
+
+    const order = {
+        customerName: name,
+        customerPhone: phone,
+        customerAddress: address,
+        items: cart,
+        total: total,
+        createdAt: serverTimestamp()
+    };
+
+    try {
+
+        await addDoc(collection(db, "orders"), order);
+
+        window.open(
+            `https://wa.me/919662581023?text=${msg}`
+        );
+
+        alert("✅ Order Placed Successfully!");
+
+        cart = [];
+        showCart();
+
+        document.getElementById("customerName").value = "";
+        document.getElementById("customerPhone").value = "";
+        document.getElementById("customerAddress").value = "";
+
+    } catch (error) {
+
+        console.error(error);
+        alert("Failed to place order.");
+
+    }
 
 }
 // --------------------
