@@ -1,103 +1,218 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>SS Collection Admin</title>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
 body{
-    background:#111;
-    color:white;
-    font-family:Arial;
+
+background:#0f172a;
+padding:30px;
+color:white;
+
 }
 
 .admin{
-    width:450px;
-    margin:40px auto;
-    background:#1b1b1b;
-    padding:25px;
-    border-radius:10px;
+
+max-width:1200px;
+margin:auto;
+background:#1e293b;
+padding:30px;
+border-radius:18px;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+
 }
 
-input,select{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:none;
-    border-radius:6px;
+h2{
+
+text-align:center;
+margin-bottom:25px;
+
+}
+
+.section-title{
+
+margin:35px 0 20px;
+
+}
+
+input,
+select,
+textarea{
+
+width:100%;
+padding:14px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+background:#334155;
+color:white;
+font-size:15px;
+
+}
+
+input::placeholder,
+textarea::placeholder{
+
+color:#cbd5e1;
+
 }
 
 button{
-    width:100%;
-    padding:12px;
-    background:gold;
-    color:black;
-    font-weight:bold;
-    border:none;
-    border-radius:6px;
-    cursor:pointer;
+
+padding:13px;
+border:none;
+border-radius:10px;
+cursor:pointer;
+font-weight:bold;
+transition:.3s;
+
 }
 
-img{
-    width:120px;
-    margin-top:10px;
+button:hover{
+
+transform:scale(1.03);
+
 }
+
+#saveBtn{
+
+width:100%;
+background:#16a34a;
+color:white;
+margin-top:10px;
+
+}
+
+.logout-btn{
+
+width:100%;
+background:#ef4444;
+color:white;
+margin-bottom:20px;
+
+}
+
+.product-card{
+
+background:#334155;
+padding:20px;
+border-radius:15px;
+margin:20px 0;
+box-shadow:0 5px 15px rgba(0,0,0,.3);
+
+}
+
+.product-card img{
+
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:12px;
+display:block;
+margin:auto auto 15px;
+
+}
+
+#products,
+#orders{
+
+margin-top:20px;
+
+}
+
+hr{
+
+border:none;
+height:1px;
+background:#475569;
+margin:30px 0;
+
+}
+
 </style>
 
 </head>
+
 <body>
 
 <div class="admin">
 
-<h2>SS COLLECTION ADMIN</h2>
-    <button
-        onclick="logout()"
-        style="background:#ff3b30; margin-bottom:20px;">
-        Logout
-    </button>
+<h2>🛍️ SS COLLECTION ADMIN PANEL</h2>
+
+<button
+class="logout-btn"
+onclick="logout()">
+Logout
+</button>
+
 <input type="file" id="image">
 
-<input type="text" id="name" placeholder="Product Name">
+<input type="hidden" id="productId">
 
-<input type="number" id="price" placeholder="Price">
-    <textarea
-    id="description"
-    placeholder="Product Description"
-    rows="4"
-    style="
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border:none;
-    border-radius:6px;
-    resize:none;
-    "></textarea>
+<input
+type="text"
+id="name"
+placeholder="Product Name">
+
+<input
+type="number"
+id="price"
+placeholder="Product Price">
+
+<textarea
+id="description"
+rows="4"
+placeholder="Product Description"></textarea>
+
 <select id="category">
 
 <option>Watch</option>
-
 <option>Shoes</option>
-
 <option>Slippers</option>
-
 <option>Sunglasses</option>
-
 <option>Bag</option>
 
 </select>
 
-<button onclick="uploadProduct()">
+<button
+id="saveBtn"
+onclick="saveProduct()">
 Add Product
 </button>
 
 <hr>
 
-<h3 style="margin-top:20px;">All Products</h3>
+<h2 class="section-title">📦 All Products</h2>
 
-<div id="products"></div>
+<div id="products">
+
+</div>
+
+<hr>
+
+<h2 class="section-title">🛒 Customer Orders</h2>
+
+<div id="orders">
+
+<p>No Orders Yet</p>
+
+</div>
 
 </div>
 
